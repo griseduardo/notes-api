@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 const Note = mongoose.model('Note', {
     patient: {
@@ -12,16 +13,21 @@ const Note = mongoose.model('Note', {
         trim: true
     },
     phone: {
-        type: Number,
+        type: String,
         required: true,
         validate(value) {
             if (!validator.isMobilePhone(value, 'pt-BR')) {
-                throw new Error('Número não é válido')
+                throw new Error('Número não é válido, usar formato +5511XXXXXXXXX')
             }
         }
     },
+    completed: {
+        type: Boolean,
+        default: false
+    },
     date: {
-        value = new Date()
+        type: String,
+        default: ((new Date()).getDate()) + '/' + ((new Date()).getMonth()+1) + '/' + ((new Date()).getFullYear())
     }
 })
 

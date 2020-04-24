@@ -29,7 +29,7 @@ const User = mongoose.model('User', {
         required: true,
         trim: true,
         validate(value) {
-            if(!validator.contains(value.toLowerCase(), 'secretaria' || 'admistrativa' || 'medica')) {
+            if(!validator.contains(value.toLowerCase(), 'secretaria' || 'administrativa' || 'medica')) {
                 throw new Error('Necessário ser umas das área: secretaria ou administrativa ou medica')
             }
         }
